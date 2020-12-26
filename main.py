@@ -14,11 +14,9 @@ def main():
     with open(args.rom_path, 'rb') as SMB_file:
         l = SMB_file.read()
 
-    rom = ROM(list(l))
+    rom = ROM(l)
     cpu = CPU()
     cpu.load_rom(rom)
-
-
 
 
 if __name__ == '__main__':

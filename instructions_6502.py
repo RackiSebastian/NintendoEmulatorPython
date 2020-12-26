@@ -10,9 +10,10 @@ aaaaaa
 aa
 aaaaa
 '''
-from abc import ABC,abstractmethod
+from abc import ABC, abstractmethod, abstractproperty
 
-#To make this an abstract class you must inherit from ABC?>
+
+# To make this an abstract class you must inherit from ABC?>
 
 class Instructions(ABC):
     '''
@@ -20,27 +21,49 @@ class Instructions(ABC):
     before i figure out how to move it to hex
 
     '''
-    def __init__(self,b):
+
+    def __init__(self, b):
         self.b = b
+
+    @property
+    def instr_len(self):
+        return 1
 
     '''
     Different instructions different methods
     
     '''
+
     @abstractmethod
     def pick_instr(self):
-        print("{}". format(self.b))
+        print(self.__str__())
 
 
 class LDA(Instructions):
+    instr_len = 2
+
+    def __str__(self):
+        return "LDA, Identifier: {}".format(self.b)
+
     def pick_instr(self):
         super().pick_instr()
+
 
 class SEI(Instructions):
+    instr_len = 1
+
+    def __str__(self):
+        return "SEI, Identifier: {}".format(self.b)
+
     def pick_instr(self):
         super().pick_instr()
+
 
 class CLD(Instructions):
+    instr_len = 1
+
+    def __str__(self):
+        return "CLD, Identifier: {}".format(self.b)
+
     def pick_instr(self):
         super().pick_instr()
-
