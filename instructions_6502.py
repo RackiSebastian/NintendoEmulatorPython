@@ -10,8 +10,11 @@ aaaaaa
 aa
 aaaaa
 '''
+from abc import ABC,abstractmethod
 
-class Instructions:
+#To make this an abstract class you must inherit from ABC?>
+
+class Instructions(ABC):
     '''
     @param: b is the byte (processing as an int at the moment for clarity
     before i figure out how to move it to hex
@@ -24,6 +27,13 @@ class Instructions:
     Different instructions different methods
     
     '''
+    @abstractmethod
     def pick_instr(self):
-        pass
+        print("{}". format(self.b))
+
+
+class LDA(Instructions):
+    def pick_instr(self):
+        super().pick_instr()
+
 

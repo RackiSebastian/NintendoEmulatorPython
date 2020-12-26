@@ -1,6 +1,6 @@
 import argparse
 from CPU import CPU
-from instructions_6502 import *
+from instructions_6502 import Instructions,LDA
 
 def main():
     parser = argparse.ArgumentParser(description="Nintendo Simulator")
@@ -12,7 +12,7 @@ def main():
 
     '''Reading in Hex values '''
     with open(args.rom_path,'rb') as SMB_file:
-        l = SMB_file.readlines()
+        l = SMB_file.read()
 
 
     cpu = CPU()
@@ -29,8 +29,9 @@ def main():
 
     '''process each instruction and see what it does(bytes)'''
     for instruction in list(instructions):
-        instr = Instructions(instruction)
-        cpu.instr(instruction)
+        instr = LDA(instruction)
+        cpu.instr(instr)
+
 
 if __name__ == '__main__':
     main()
