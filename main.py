@@ -1,5 +1,6 @@
 import argparse
 from CPU import CPU
+from instructions_6502 import *
 
 def main():
     parser = argparse.ArgumentParser(description="Nintendo Simulator")
@@ -19,13 +20,17 @@ def main():
     Instructions start at 16kb 
     Represent each byte of data 
     8 bits in each byte of data 
+    16384 = 16kb
     '''
-    #Change this too hardcoded
     prg_block = 2
-    instructions = l[0][16:16+16384 * prg_block]
-    print(instructions)
-    print(cpu.instr(l[0][0:3]))
+    HEADER_SIZE = 16
+    KBS = 16384
+    instructions = l[HEADER_SIZE:16+KBS * prg_block]
 
+    '''process each instruction and see what it does(bytes)'''
+    for instruction in list(instructions):
+        instr = Instructions(instruction)
+        cpu.instr(instruction)
 
 if __name__ == '__main__':
     main()
