@@ -1,6 +1,7 @@
 from instructions_6502 import Instructions
 from instructions_6502 import LDA, SEI, CLD
 from ROM import ROM
+from collections import defaultdict
 
 
 class CPU:
@@ -10,13 +11,15 @@ class CPU:
         self.state = True
         # Program counter starts at 16 and has current execution point
         self.pc = None
-        self.mapper = {
-            # 169 = A9 so we do an LDA
-            bytes.fromhex('A9'): LDA,
-            bytes.fromhex('78'): SEI,
-            bytes.fromhex('D8'): CLD
+        self.mapper = [
+            CLD,
+            SEI,
+            LDA
+        ]
+        self.instr_mapper =defaultdict()
 
-        }
+        for instructions in self.mapper:
+            self.instr_mapper[instructions.identifier] = instructions
 
     # Take in instruction as bytes
     def instr(self, instruction: Instructions):
@@ -30,11 +33,11 @@ class CPU:
         while self.state:
             instr = self.rom.get_instr(self.pc)
             '''add this so if we cant find it it wont crash but return None'''
-            instruction = self.mapper.get(instr, None)
+            instruction = self.instr_mapper.get(instr, None)
             if instruction is None:
                 raise Exception("Instruction invalid!")
 
-            instr_cls = instruction(instr)
+            instr_cls = instruction()
             instr_cls.pick_instr()
 
             self.pc += instruction.instr_len

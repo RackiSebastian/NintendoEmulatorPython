@@ -22,19 +22,20 @@ class Instructions(ABC):
 
     '''
 
-    def __init__(self, b):
-        self.b = b
+    def __init__(self):
+        pass
 
     def __str__(self):
-        return "{}, Identifier: {}".format(self.name, self.b.hex())
+        return "{}, Identifier: {}".format(self.__class__.__name__, self.identifier)
 
     @property
     def instr_len(self):
         return 1
 
+
     @property
-    def name(self):
-        return 0
+    def identifier(self):
+        return None
 
     '''
     Different instructions different methods
@@ -48,14 +49,14 @@ class Instructions(ABC):
 
 class LDA(Instructions):
     instr_len = 2
-    name = 'LDA'
+    identifier = bytes.fromhex('A9')
 
     def pick_instr(self):
         super().pick_instr()
 
 
 class SEI(Instructions):
-    name = 'SEI'
+    identifier = bytes.fromhex('78')
     instr_len = 1
 
     def pick_instr(self):
@@ -63,7 +64,7 @@ class SEI(Instructions):
 
 
 class CLD(Instructions):
-    name = 'CLD'
+    identifier = bytes.fromhex('D8')
     instr_len = 1
 
     def pick_instr(self):
