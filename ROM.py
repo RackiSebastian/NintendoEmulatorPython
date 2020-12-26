@@ -14,7 +14,7 @@ class ROM():
             '''
         self.HEADER = 16
         self.prg_block = 2
-        self.instructions = byts[self.HEADER_SIZE:16 + KBS * self.prg_block]
+        self.instructions = byts[self.HEADER:16 + KBS * self.prg_block]
 
     def get_instr(self,position):
 

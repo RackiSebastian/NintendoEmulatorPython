@@ -36,4 +36,11 @@ class LDA(Instructions):
     def pick_instr(self):
         super().pick_instr()
 
+class SEI(Instructions):
+    def pick_instr(self):
+        super().pick_instr()
+
+class CLD(Instructions):
+    def pick_instr(self):
+        super().pick_instr()
 

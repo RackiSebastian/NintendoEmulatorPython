@@ -17,7 +17,7 @@ def main():
     rom = ROM(list(l))
     cpu = CPU()
     cpu.load_rom(rom)
-    cpu.get_instructions()
+
 
 
 
